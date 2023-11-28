@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Flask Project</title>
+</head>
+<body>
+    <h1>Flask Project</h1>
+    <form action="{{ url_for('run_code') }}" method="post">
+        <label for="code1">Code 1:</label>
+        <input type="text" name="code1" required>
+        <label for="code2">Code 2:</label>
+        <input type="text" name="code2" required>
+        <button type="submit">Run Code</button>
+    </form>
+    {% if result %}
+        <div id="result">
+            <p>Result:</p>
+            <pre>{{ result }}</pre>
+        </div>
+    {% endif %}
+</body>
+</html>
