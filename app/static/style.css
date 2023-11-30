@@ -12,3 +12,22 @@ form {
     border: 1px solid #ccc;
     padding: 10px;
 }
+
+.center {
+    text-align: center;
+}
+
+.matrixInput{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+

@@ -1,7 +1,8 @@
 from flask import render_template, request
 from app import app
 import subprocess
-from app.script import add
+from app.script import add, check_input, make_score_matrix
+
 
 @app.route('/')
 def index():
@@ -9,11 +10,29 @@ def index():
 
 @app.route('/run_code', methods=['POST'])
 def run_code():
-    code1 = request.form['code1']
-    code2 = request.form['code2']
+    seq1 = request.form['code1']
+    seq2 = request.form['code2']
+    
+    if not check_input(seq1) or not check_input(seq2):
+        result = "ERRRORRRRRR. Check your input strings"
+    else:
+        print("Hellop")
 
-    # You can modify this to run your specific code
-    result = add(int(code1), int(code2))
-    print(result)
+    type_of_alignment = request.form['alignmentType']
+    positions = ['a','b', 'c', 'd', 'e', 'f', 'g','h','i','j','k','l','m','n','o', 'p']
+    gap_penalty = int(request.form['gap_penalty'])
+    array = []
+
+    for c in positions:
+        array.append(int(request.form[c]))
+
+    
+    score_matrix = make_score_matrix(array, gap_penalty)
+
+
+    
+
+    
+
 
     return render_template('index.html', result=result)
