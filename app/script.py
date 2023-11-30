@@ -3,7 +3,7 @@
 import numpy as np
 def add(a, b):
     return a + b
-    
+
 def check_input(seq):
     for s in seq:
         if s not in ['A', 'C', 'G', 'T']:
@@ -22,6 +22,21 @@ def make_score_matrix(array, gap_penalty):
         score[char] = {}
         for j in range(array.shape[1]):
             score[char][mapping[j]] = array[i][j]
+        
+        score[char]['-'] = gap_penalty
     
-    print(score)
+    score['-'] = {}
+    
+    for i in range(array.shape[0]):
+        score['-'][mapping[i]] = gap_penalty
+
+    score['-']['-'] = 1
+
+    return score
+
+
+
+    
+    
+   
 

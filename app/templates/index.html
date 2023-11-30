@@ -19,22 +19,22 @@
     <form action="{{ url_for('run_code') }}" method="post">
 
         Enter the two sequences that you want to align below. Please ensure you only include valid sequences. Valid sequences are made up of UPPERCASE <b> A, G, C, and T</b>. Spaces are not valid characters. 
-        Any other input in these textboxes will cause the aligner to return an error message. You will lose your input once you hit the submit button. (Input Retention in Progress) <br> <br>
+        Any other input in these textboxes will cause the aligner to return an error message. The aligner has two sample sequences set as default. You can change the input or try different kinds of alignment with the sample sequences. You will lose your input once you hit the submit button. (Input Retention in Progress) <br> <br>
         
 
 
         <div class="left">
         <b><label for="code1">Sequence 1:</label>
-        <input type="text" name="code1" required> <br> <br>
+        <input type="text" name="code1" placeholder="AAGC (Some sample string)" value="AAGC"> <br> <br>
         <label for="code2">Sequence 2:</label>
-        <input type="text" name="code2" required> <br><br>
+        <input type="text" name="code2" placeholder="ACGC (Some sample string)" value="ACGC"> <br><br>
         </b>
 
         <div class = "right">
             <label for="alignmentType">Alignment Type:</label>
             <select id="alignmentType" name="alignmentType">
-            <option value="local">Local Alignment</option>
             <option value="global">Global Alignment</option>
+            <option value="local">Local Alignment</option>
             <option value="fitting">Fitting Alignment</option>
             </select>
         </div>
@@ -111,10 +111,17 @@
     </form>
     {% if result %}
         <div id="result">
-            <p>Result:</p>
+            <b><p>Result:</p></b>
             <pre>{{ result }}</pre>
         </div>
     {% endif %}
+
+    {% if score %}
+    <div id="score">
+        <b><p>Score:</p></b>
+        <pre>{{ score }}</pre>
+    </div>
+{% endif %}
 </div>
 </body>
 </html>
