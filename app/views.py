@@ -16,6 +16,7 @@ def run_code():
     
     if not check_input(seq1) or not check_input(seq2):
         result = "ERRRORRRRRR. Check your input strings"
+        score = "ERRRR"
     else:
         type_of_alignment = request.form['alignmentType']
         positions = ['a','b', 'c', 'd', 'e', 'f', 'g','h','i','j','k','l','m','n','o', 'p']

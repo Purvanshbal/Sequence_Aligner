@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Flask Project</title>
+    <title>Sequence Aligner</title>
 </head>
 <body>
 
     <div class="center">
-        <h1 >Sequence Aligner</h1>
+       <u><h1 >Genetic Sequence Alignment Tool</h1></u>
     </div>
 
     <hr>
@@ -31,7 +31,7 @@
         <input type="text" name="code2" placeholder="ACGC (Some sample string)" value="ACGC"> <br><br>
         </b>
 
-        <div class = "right">
+        <div class = "left">
             <label for="alignmentType">Alignment Type:</label>
             <select id="alignmentType" name="alignmentType">
             <option value="global">Global Alignment</option>
@@ -112,15 +112,15 @@
     </form>
     {% if result %}
         <div id="result">
-            <b><p>Result:</p></b>
-            <pre>{{ result }}</pre>
+            <b><p>Result:</p>
+            <pre>{{ result }}</pre></b>
         </div>
     {% endif %}
 
     {% if score %}
     <div id="score">
-        <b><p>Score:</p></b>
-        <pre>{{ score }}</pre>
+        <b><p>Score:</p>
+        <pre>{{ score }}</pre></b>
     </div>
 {% endif %}
 </div>
