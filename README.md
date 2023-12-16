@@ -11,26 +11,6 @@ Welcome to our CS 466 Final Project! Our team is excited to introduce an interac
 ## Planned Method/Experimentations:
 We plan to implement algorithms covered in class, incorporating standard visualization techniques such as the matrix representation used in our reference aligner. Our project is built in Python, utilizing the Django framework for web development. Additionally, we leverage standard Python libraries like NumPy, Pandas, and Matplotlib for efficient visualization.
 
-### Week 1 (November 17 - November 24):
-- Set up the development environment and version control.
-- Design the user interface and plan implementation details.
-- Implement Global, Local, and Fitting Alignment algorithms.
-
-### Week 2 (November 25 - December 2):
-- Implement Gap Affine Penalty Alignment Algorithm.
-- Make improvements to the frontend and introduce additional features.
-
-### Week 3 (December 3 - December 10):
-- Develop visualization features for all alignment algorithms.
-- Initiate work on Multiple Sequence Alignment.
-
-### Week 4 (December 11 - December 15):
-- Complete the implementation of the MSA algorithm and integrate it into the tool.
-- Conduct debugging and refactoring of the codebase to ensure deployment readiness.
-- Work on the Project Report.
-
-We ensure effective collaboration through regular meetings, hack sessions, and version control via our GitHub repository.
-
 ## How to Run:
 To run the Sequence Aligner locally, follow these steps:
 
