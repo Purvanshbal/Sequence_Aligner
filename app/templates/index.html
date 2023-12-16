@@ -3,126 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Sequence Aligner</title>
+    <title>About Sequence Aligner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
 </head>
 <body>
 
-    <div class="center">
-       <u><h1 >Genetic Sequence Alignment Tool</h1></u>
-    </div>
+<header>
+    <h1>CS 466 Final Project: Sequence Aligner</h1>
+    <h2>Team Members:</h2>
+    <ul>
+        <li>Pooja Ganesh (<a href="mailto:pganesh4@illinois.edu">pganesh4</a>)</li>
+        <li>Dirgh Shah (<a href="mailto:dirghvs2@illinois.edu">dirghvs2</a>)</li>
+        <li>Purvansh Bal (<a href="mailto:pbal3@illinois.edu">pbal3</a>)</li>
+    </ul>
 
+    <br><br><br>
     <hr>
 
-    
-    <div class = "center">
-    <form action="{{ url_for('run_code') }}" method="post">
+    <nav class="navbar">
+      <ul>
+          <li><a href="seq_align.html">2- Sequence Aligner</a></li>
+          <li><a href="msa.html">Multiple Sequence Aligner</a></li>
+          <li><a href="gap.html">Gap Affine Penalty</a></li>
+      </ul>
+  </nav>
+  <hr>
 
-        Enter the two sequences that you want to align below. Please ensure you only include valid sequences. Valid sequences are made up of UPPERCASE <b> A, G, C, and T</b>. Spaces are not valid characters. 
-        Any other input in these textboxes will cause the aligner to return an error message. The aligner has two sample sequences set as default. You can change the input or try different kinds of alignment with the sample sequences. You will lose your input once you hit the submit button. (Input Retention in Progress)<br>
-        <b> For Fitting alignment, please provide the short read as the first sequence and the reference read as the second sequence</b> <br> <br>
-        
-
-
-        <div class="left">
-        <b><label for="code1">Sequence 1:</label>
-        <input type="text" name="code1" placeholder="AAGC (Some sample string)" value="AAGC"> <br> <br>
-        <label for="code2">Sequence 2:</label>
-        <input type="text" name="code2" placeholder="ACGC (Some sample string)" value="ACGC"> <br><br>
-        </b>
-
-        <div class = "left">
-            <label for="alignmentType">Alignment Type:</label>
-            <select id="alignmentType" name="alignmentType">
-            <option value="global">Global Alignment</option>
-            <option value="local">Local Alignment</option>
-            <option value="fitting">Fitting Alignment</option>
-            </select>
-        </div>
-        </div>
-
-       
-
-        <div class="center">
-           <b> PLEASE PROVIDE THE SCORING MATRIX BELOW </b><br> Please provide the scores as positive or negative integers. Do not add decimals. 
-        </div>
+  <br><br><br>
+  </header>
 
 
-        <div class="center">
-            <label>Scoring Matrix</label>
-        </div>
+  <section id="method">
+    <h2>About: </h2>
+    <p>Welcome to the CS 466 Final Project: Sequence Aligner! Our team, consisting of Pooja Ganesh, Dirgh Shah, and Purvansh Bal, is excited to present this interactive web platform designed to implement and visualize various sequence alignment algorithms. From Global Alignment to Local Alignment, Fitting Alignment, Gap Affine Penalty Alignment, and Multiple Sequence Alignment, our tool caters to DNA, RNA, and protein sequences. Our approach involves leveraging class-covered algorithms, utilizing standard visualization techniques, and implementing the project in Python with the Django framework. With a planned timeline encompassing algorithm implementation, frontend enhancements, and visualization features, we strive to create a comprehensive tool. Regular meetings and hack sessions, coupled with version control through GitHub, ensure effective collaboration. Inspired by the aligner provided in class (https://valiec.github.io/AlignmentVisualizer/index.html), our project aims to offer a robust and user-friendly experience in the field of sequence alignment. Explore the diverse functionalities of our aligner, and stay tuned for updates as we progress through the development phases!.</p>
+</section>
 
+<section id="how to use">
 
+  <h2> How to Use: </h2>
+  <p>Use the navigation bar at the top of the page to toggle between different aligners we offer.</p>
 
-       
-        <table class="matrixInput">
-          <tbody>
-           
-            <tr>
-                <td></td>
-                <td> <b>A</b></td>
-                <td> <b>G</b></td>
-                <td> <b>C</b></td>
-                <td> <b>T</b></td>
+</section>
 
-            </tr>
-            <tr>
-              <td> <b>A</b></td>
-              <td><input type="number" name="a" value="1" placeholder="1"></td>
-              <td><input type="number" name="b" value="-1" placeholder="-1"></td>
-              <td><input type="number" name="c" value="-1" placeholder="-1"></td>
-              <td><input type="number" name="d" value="-1" placeholder="-1"></td>
-            
-            </tr>
-            <tr>
-                <td> <b>G</b></td>
-                <td><input type="number" name="e" value="-1" placeholder="-1"></td>
-                <td><input type="number" name="f" value="1" placeholder="1"></td>
-                <td><input type="number" name="g" value="-1" placeholder="-1"></td>
-                <td><input type="number" name="h" value="-1" placeholder="-1"></td>
-               
-              </tr>
-              <tr>
-                <td> <b>C</b></td>
-                <td><input type="number" name="i" value="-1" placeholder="-1"></td>
-                <td><input type="number" name="j" value="-1" placeholder="-1"></td>
-                <td><input type="number" name="k" value="1" placeholder="1"></td>
-                <td><input type="number" name="l" value="-1" placeholder="-1"></td>
-              
-              </tr>
-              <tr>
-                <td> <b>T</b></td>
-                <td><input type="number" name="m" value="-1" placeholder="-1"></td>
-                <td><input type="number" name="n" value="-1"placeholder="-1"></td>
-                <td><input type="number" name="o" value="-1" placeholder="-1"></td>
-                <td><input type="number" name="p" value="1" placeholder="1"></td>
-            
-              </tr>
-        
-          </tbody>
-        </table>
-
-    <br>
-    <br>
-
-    <label><b>Gap Penalty:</b></label>
-    <input type="number" name="gap_penalty" value="-1" min="-100" max="100"> <br>(Please enter the gap penalty as a positive or negative integer) <br> <br>
-    <input type="submit" value="Submit">
-
-    </form>
-    {% if result %}
-        <div id="result">
-            <b><p>Result:</p>
-            <pre>{{ result }}</pre></b>
-        </div>
-    {% endif %}
-
-    {% if score %}
-    <div id="score">
-        <b><p>Score:</p>
-        <pre>{{ score }}</pre></b>
-    </div>
-{% endif %}
-</div>
 </body>
 </html>

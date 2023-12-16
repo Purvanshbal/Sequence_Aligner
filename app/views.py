@@ -9,6 +9,22 @@ from app.aligners import global_aligner, local_aligner, fitting_aligner
 def index():
     return render_template('index.html')
 
+
+@app.route('/seq_align.html')
+def seq_align():
+    return render_template('seq_align.html')
+
+
+@app.route('/msa.html')
+def msa():
+    return render_template('msa.html')
+
+
+@app.route('/gap.html')
+def gap():
+    return render_template('gap.html')
+
+
 @app.route('/run_code', methods=['POST'])
 def run_code():
     seq1 = request.form['code1']
@@ -40,4 +56,4 @@ def run_code():
             score, result = fitting_aligner(seq1, seq2, score_matrix)
 
 
-    return render_template('index.html', result=result, score=score)
+    return render_template('seq_align.html', result=result, score=score)

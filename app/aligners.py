@@ -192,3 +192,5 @@ def fitting_aligner(short, reference, delta):
     score = max(M[len(short)])
     alignment = traceback_fitting(short,reference,M, init_j,pointers)
     return score, alignment
+
+
