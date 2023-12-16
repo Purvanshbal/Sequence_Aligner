@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>MSA</title>
+</head>
+<body>
+
+    <div class="center">
+       <u><h1 >Multiple Sequence Alignment</h1></u>
+    </div>
+
+    <hr>
+
+    
+    <div class = "center">
+    <form action="{{ url_for('run_msa_code') }}" method="post">
+
+        Enter the three sequences that you want to align below. Please ensure you only include valid sequences. Valid sequences are made up of UPPERCASE <b> A, G, C, and T</b>. Spaces are not valid characters. 
+        Any other input in these textboxes will cause the aligner to return an error message. The aligner has three sample sequences set as default. You will lose your input once you hit the submit button. (Input Retention in Progress)<br>
+        <br> <br>
+        
+
+        <div class="left">
+        <b><label for="code1">Sequence 1:</label>
+        <input type="text" name="code1" placeholder="AAGC (Some sample string)" value="AAGC"> <br> <br>
+        <label for="code2">Sequence 2:</label>
+        <input type="text" name="code2" placeholder="ACGC (Some sample string)" value="ACGC"> <br><br>
+        <label for="code3">Sequence 3:</label>
+        <input type="text" name="code3" placeholder="ATGC (Some sample string)" value="ATGC"> <br><br>
+        </b>
+
+        
+    <label><b>Match Score:</b></label>
+    <input type="number" name="match_score" value="1" min="-100" max="100"> <br>(Please enter the match score as a positive or negative integer) <br> <br>
+    <label><b>Mismatch Penalty:</b></label>
+    <input type="number" name="mismatch_penalty" value="-1" min="-100" max="100"> <br>(Please enter the mismatch penalty as a positive or negative integer) <br> <br>
+    <label><b>Gap Penalty:</b></label>
+    <input type="number" name="gap_penalty" value="-1" min="-100" max="100"> <br>(Please enter the gap penalty as a positive or negative integer) <br> <br>
+  
+    <input type="submit" value="Submit">
+
+    </div>
+
+    </form>
+    {% if result %}
+        <div id="result">
+            <b><p>Result:</p>
+            <pre>{{ result }}</pre></b>
+        </div>
+    {% endif %}
+
+    {% if score %}
+    <div id="score">
+        <b><p>Score:</p>
+        <pre>{{ score }}</pre></b>
+    </div>
+{% endif %}
+</div>
+</body>
+</html>

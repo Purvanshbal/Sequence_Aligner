@@ -194,3 +194,126 @@ def fitting_aligner(short, reference, delta):
     return score, alignment
 
 
+'''
+v,w == seq1, seq2: The 3 sequences to be aligned.
+match_score: The score for a match between two characters in the sequences.
+mismatch_penalty: The penalty for a mismatch.
+gap_penalty: The penalty for one, two gaps.
+
+'''
+
+def initialize_matrix(dimensions, value=0):
+    return [[[value] * dimensions[2] for _ in range(dimensions[1])] for _ in range(dimensions[0])]
+
+
+
+
+def multiple_sequence_alignment(seq1, seq2, seq3, match_score, mismatch_penalty, gap_penalty):
+    n = len(seq1)
+    m = len(seq2)
+    p = len(seq3)
+
+    score_matrix = initialize_matrix((n + 1, m + 1, p + 1))
+
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            for k in range(1, p + 1):
+                match_score_value = match_score if seq1[i - 1] == seq2[j - 1] == seq3[k - 1] else mismatch_penalty
+
+                diagonal_score = score_matrix[i - 1][j - 1][k - 1] + match_score_value
+                vertical_score = score_matrix[i - 1][j][k] - (gap_penalty)
+                horizontal_score = score_matrix[i][j - 1][k] - (gap_penalty)
+                depth_score = score_matrix[i][j][k - 1] - (gap_penalty)
+
+                score_matrix[i][j][k] = max(diagonal_score, vertical_score, horizontal_score, depth_score, 0)
+
+    aligned_seq1, aligned_seq2, aligned_seq3 = "", "", ""
+    i, j, k = n, m, p
+
+    while i > 0 or j > 0 or k > 0:
+        current_score = score_matrix[i][j][k]
+        match_score_value = match_score if seq1[i - 1] == seq2[j - 1] == seq3[k - 1] else mismatch_penalty
+
+        if i > 0 and j > 0 and k > 0 and score_matrix[i][j][k] == score_matrix[i - 1][j - 1][k - 1] + match_score_value:
+            aligned_seq1 = seq1[i - 1] + aligned_seq1
+            aligned_seq2 = seq2[j - 1] + aligned_seq2
+            aligned_seq3 = seq3[k - 1] + aligned_seq3
+            i -= 1
+            j -= 1
+            k -= 1
+        elif i > 0 and score_matrix[i][j][k] == score_matrix[i - 1][j][k] - (gap_penalty):
+            aligned_seq1 = seq1[i - 1] + aligned_seq1
+            aligned_seq2 = '-' + aligned_seq2
+            aligned_seq3 = '-' + aligned_seq3
+            i -= 1
+        elif j > 0 and score_matrix[i][j][k] == score_matrix[i][j - 1][k] - (gap_penalty):
+            aligned_seq1 = '-' + aligned_seq1
+            aligned_seq2 = seq2[j - 1] + aligned_seq2
+            aligned_seq3 = '-' + aligned_seq3
+            j -= 1
+        elif k > 0 and score_matrix[i][j][k] == score_matrix[i][j][k - 1] - (gap_penalty):
+            aligned_seq1 = '-' + aligned_seq1
+            aligned_seq2 = '-' + aligned_seq2
+            aligned_seq3 = seq3[k - 1] + aligned_seq3
+            k -= 1
+        elif i > 0 and j > 0 and k > 0 and score_matrix[i][j][k] == 0:
+            aligned_seq1 = seq1[i - 1] + aligned_seq1
+            aligned_seq2 = seq2[j - 1] + aligned_seq2
+            aligned_seq3 = seq3[k - 1] + aligned_seq3
+            i -= 1
+            j -= 1
+            k -= 1
+        else:
+            break  
+
+    return aligned_seq1, aligned_seq2, aligned_seq3, score_matrix[n][m][p]
+
+def gap_affine_penalty_alignment(v, w, match_score, mis_pen, open_pen, ext_pen):
+    n, m = len(v), len(w)
+    
+    # Initialize matrices
+    mat = [[0 for _ in range(m + 1)] for _ in range(n + 1)]
+    
+    # For vertical gaps (in w)
+    ext_v = [[0 for _ in range(m + 1)] for _ in range(n + 1)] 
+    
+    # For horizontal gaps (in v)
+    ext_h = [[0 for _ in range(m + 1)] for _ in range(n + 1)]  
+
+    # Fill matrices
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            c1, c2 = v[i - 1], w[j - 1]
+            score = match_score if c1 == c2 else -mis_pen
+
+            # main matrix - choosing the best option: match/mismatch, vertical gap, or horizontal gap
+            mat[i][j] = max(mat[i-1][j-1] + score, ext_v[i][j], ext_h[i][j])
+
+            # Vertical gap matrix - extending or starting a new gap in w
+            ext_v[i][j] = max(ext_v[i-1][j] - ext_pen, mat[i-1][j] - open_pen)
+
+            # Horizontal gap matrix - extending or starting a new gap in v
+            ext_h[i][j] = max(ext_h[i][j-1] - ext_pen, mat[i][j-1] - open_pen)
+
+    # Traceback to find the optimal alignment and calculate the score
+    v_aligned, w_aligned = "", ""
+    i, j = n, m
+    alignment_score = 0
+    while i > 0 and j > 0:
+        if mat[i][j] == mat[i-1][j-1] + (match_score if v[i-1] == w[j-1] else -mis_pen):
+            v_aligned = v[i-1] + v_aligned
+            w_aligned = w[j-1] + w_aligned
+            alignment_score += match_score if v[i-1] == w[j-1] else -mis_pen
+            i, j = i - 1, j - 1
+        elif mat[i][j] == ext_v[i][j]:
+            v_aligned = v[i-1] + v_aligned
+            w_aligned = "-" + w_aligned
+            alignment_score -= (open_pen if mat[i][j] == mat[i-1][j] - open_pen else ext_pen)
+            i -= 1
+        else:
+            v_aligned = "-" + v_aligned
+            w_aligned = w[j-1] + w_aligned
+            alignment_score -= (open_pen if mat[i][j] == mat[i][j-1] - open_pen else ext_pen)
+            j -= 1
+
+    return v_aligned, w_aligned, alignment_score
