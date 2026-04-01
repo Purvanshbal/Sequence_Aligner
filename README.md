@@ -1,15 +1,10 @@
-# CS 466 Final Project: Sequence Aligner
-
-## Team Members:
-- Pooja Ganesh (pganesh4, pganesh4@illinois.edu)
-- Dirgh Shah (dirghvs2, dirghvs2@illinois.edu)
-- Purvansh Bal (pbal3, pbal3@illinois.edu)
+# Sequence Aligner
 
 ## Brief Motivation:
-Welcome to our CS 466 Final Project! Our team is excited to introduce an interactive web platform focused on implementing and visualizing a range of sequence alignment algorithms. This project encompasses Global Alignment, Local Alignment, Fitting Alignment, Gap Affine Penalty Alignment, and Multiple Sequence Alignment for DNA, RNA, and protein sequences.
+An interactive web platform focused on implementing and visualizing a range of sequence alignment algorithms. This project encompasses Global Alignment, Local Alignment, Fitting Alignment, Gap Affine Penalty Alignment, and Multiple Sequence Alignment for DNA, RNA, and protein sequences.
 
 ## Planned Method/Experimentations:
-We plan to implement algorithms covered in class, incorporating standard visualization techniques such as the matrix representation used in our reference aligner. Our project is built in Python, utilizing the Django framework for web development. Additionally, we leverage standard Python libraries like NumPy, Pandas, and Matplotlib for efficient visualization.
+We plan to implement algorithms, incorporating standard visualization techniques such as the matrix representation used in our reference aligner. Our project is built in Python, utilizing the Django framework for web development. Additionally, we leverage standard Python libraries like NumPy, Pandas, and Matplotlib for efficient visualization.
 
 ## How to Run:
 To run the Sequence Aligner locally, follow these steps:
